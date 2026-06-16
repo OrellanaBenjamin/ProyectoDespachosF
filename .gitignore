@@ -1,9 +1,41 @@
-.env
-
-terraform.tfstate
-terraform.tfstate.backup
-
+# Terraform
 .terraform/
 .terraform.lock.hcl
+*.tfstate
+*.tfstate.*
+crash.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
 
+# Variables sensibles
+terraform.tfvars
 *.pem
+.env
+.env.*
+
+# AWS
+.aws/
+
+# Logs
+*.log
+
+# Java / Spring Boot
+target/
+*.jar
+*.war
+
+# Node
+node_modules/
+dist/
+build/
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# Sistema
+.DS_Store
+Thumbs.db
