@@ -1,8 +1,10 @@
+# =========================
 # Terraform
+# =========================
 .terraform/
 .terraform.lock.hcl
-*.tfstate
-*.tfstate.*
+terraform.tfstate
+terraform.tfstate.*
 crash.log
 override.tf
 override.tf.json
@@ -15,27 +17,39 @@ terraform.tfvars
 .env
 .env.*
 
+# =========================
 # AWS
+# =========================
 .aws/
 
+# =========================
 # Logs
+# =========================
 *.log
 
+# =========================
 # Java / Spring Boot
-target/
+# =========================
 *.jar
 *.war
+target/
 
-# Node
+# =========================
+# Node / Frontend
+# =========================
 node_modules/
 dist/
 build/
 
+# =========================
 # IDE
+# =========================
 .idea/
 .vscode/
 *.iml
 
+# =========================
 # Sistema
+# =========================
 .DS_Store
 Thumbs.db

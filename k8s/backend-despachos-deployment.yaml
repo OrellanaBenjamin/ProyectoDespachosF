@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: backend-despachos
-        image: 533267065887.dkr.ecr.us-east-1.amazonaws.com/backend-despachos:latest
+        image: 889217351448.dkr.ecr.us-east-1.amazonaws.com/despachos-back-despachos:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
@@ -28,7 +28,17 @@ spec:
             cpu: "500m"
             memory: "1Gi"
         env:
-        - name: SPRING_DATASOURCE_URL
-          value: "jdbc:mysql://<tu-bd-mysql>:3306/despachos"
-        - name: SPRING_DATASOURCE_USERNAME
-          value: "root"
+          - name: DB_ENDPOINT
+            value: "xxxx.us-east-1.rds.amazonaws.com"
+
+          - name: DB_PORT
+            value: "3306"
+
+          - name: DB_NAME
+            value: "despachos"
+
+          - name: DB_USERNAME
+            value: "admin"
+
+          - name: DB_PASSWORD
+            value: "12345678"
