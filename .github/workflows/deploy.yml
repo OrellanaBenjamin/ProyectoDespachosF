@@ -1,0 +1,80 @@
+name: Build Push Deploy EKS
+
+on:
+push:
+branches:
+- main
+
+env:
+AWS_REGION: us-east-1
+ECR_BACK_DESPACHOS: despachos-back-despachos
+ECR_BACK_VENTAS: despachos-back-ventas
+ECR_FRONTEND: despachos-frontend
+
+jobs:
+deploy:
+runs-on: ubuntu-latest
+
+steps:
+  - name: Checkout
+    uses: actions/checkout@v4
+
+  - name: Configure AWS Credentials
+    uses: aws-actions/configure-aws-credentials@v4
+    with:
+      aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      aws-region: ${{ env.AWS_REGION }}
+
+  - name: Login to Amazon ECR
+    id: login-ecr
+    uses: aws-actions/amazon-ecr-login@v2
+
+  - name: Build Backend Despachos
+    run: |
+      docker build \
+        -t ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_BACK_DESPACHOS }}:latest \
+        ./back-Despachos_SpringBoot/Springboot-API-REST-DESPACHO
+
+  - name: Push Backend Despachos
+    run: |
+      docker push \
+        ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_BACK_DESPACHOS }}:latest
+
+  - name: Build Backend Ventas
+    run: |
+      docker build \
+        -t ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_BACK_VENTAS }}:latest \
+        ./back-Ventas_SpringBoot/Springboot-API-REST
+
+  - name: Push Backend Ventas
+    run: |
+      docker push \
+        ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_BACK_VENTAS }}:latest
+
+  - name: Build Frontend
+    run: |
+      docker build \
+        -t ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_FRONTEND }}:latest \
+        ./front_despacho
+
+  - name: Push Frontend
+    run: |
+      docker push \
+        ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_FRONTEND }}:latest
+
+  - name: Update kubeconfig
+    run: |
+      aws eks update-kubeconfig \
+        --region us-east-1 \
+        --name cluster-proyecto-despachos
+
+  - name: Deploy Kubernetes
+    run: |
+      kubectl apply -f k8s/
+
+  - name: Restart Deployments
+    run: |
+      kubectl rollout restart deployment/backend-despachos
+      kubectl rollout restart deployment/backend-ventas
+      kubectl rollout restart deployment/frontend
