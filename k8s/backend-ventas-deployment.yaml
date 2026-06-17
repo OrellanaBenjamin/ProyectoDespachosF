@@ -27,3 +27,18 @@ spec:
           limits:
             cpu: "500m"
             memory: "1Gi"
+            env:
+              - name: DB_ENDPOINT
+                value: "despachos-db.cnletjr0vyhc.us-east-1.rds.amazonaws.com"
+
+              - name: DB_PORT
+                value: "3306"
+
+              - name: DB_NAME
+                value: "ventas"
+
+              - name: DB_USERNAME
+                value: "admin"
+
+              - name: DB_PASSWORD
+                value: "12345678"
