@@ -77,3 +77,4 @@ jobs:
           kubectl rollout restart deployment/backend-despachos
           kubectl rollout restart deployment/backend-ventas
           kubectl rollout restart deployment/frontend
+          
