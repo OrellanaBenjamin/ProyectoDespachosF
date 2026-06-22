@@ -6,7 +6,7 @@ on:
       - main
 
 env:
-  AWS_REGION: us-east-1
+  aws-region: ${{ vars.AWS_REGION }}
   ECR_BACK_DESPACHOS: despachos-back-despachos
   ECR_BACK_VENTAS: despachos-back-ventas
   ECR_FRONTEND: despachos-frontend
@@ -21,11 +21,10 @@ jobs:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
-          aws-region: us-east-1
+          aws-region: ${{ vars.AWS_REGION }}
 
       - name: Login to Amazon ECR
         id: login-ecr
@@ -67,8 +66,8 @@ jobs:
       - name: Update kubeconfig
         run: |
           aws eks update-kubeconfig \
-            --region us-east-1 \
-            --name cluster-proyecto-despachos
+            --region ${{ vars.AWS_REGION }}
+            --name ${{ vars.EKS_CLUSTER_NAME }}
 
       - name: Deploy Kubernetes
         run: |

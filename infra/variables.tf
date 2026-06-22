@@ -1,9 +1,19 @@
 variable "aws_region" {
-  type    = string
-  default = "us-east-1"
+  type = string
 }
 
 variable "cluster_name" {
-  type    = string
-  default = "cluster-proyecto-despachos"
+  type = string
+}
+
+variable "cluster_role_arn" {
+  type = string
+}
+
+variable "node_role_arn" {
+  type = string
+}
+
+variable "subnet_ids" {
+  type = list(string)
 }

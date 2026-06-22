@@ -53,3 +53,15 @@ build/
 # =========================
 .DS_Store
 Thumbs.db
+
+# Kubernetes Secrets
+k8s/mysql-secret.yaml
+
+# Kubernetes
+*.kubeconfig
+
+# Mac
+.AppleDouble
+
+# Windows
+Desktop.ini
