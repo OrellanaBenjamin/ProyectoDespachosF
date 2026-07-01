@@ -1,0 +1,12 @@
+aws_region = "us-east-1"
+
+cluster_name = "cluster-proyecto-despachos"
+
+cluster_role_arn = "arn:aws:iam::<ACCOUNT>:role/LabEksClusterRole"
+
+node_role_arn = "arn:aws:iam::<ACCOUNT>:role/LabEksNodeRole"
+
+subnet_ids = [
+  "subnet-xxxxxxxx",
+  "subnet-yyyyyyyy"
+]

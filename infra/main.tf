@@ -3,10 +3,13 @@ resource "aws_eks_cluster" "main" {
   role_arn = var.cluster_role_arn
 
   vpc_config {
-    subnet_ids = [
-      "subnet-0e7a9ff17d547bde9",
-      "subnet-0542d6e2f78331437"
-    ]
+    subnet_ids = var.subnet_ids
+  }
+
+  tags = {
+    Project     = "ProyectoDespachos"
+    Environment = "Lab"
+    ManagedBy   = "Terraform"
   }
 }
 
@@ -19,12 +22,20 @@ resource "aws_eks_node_group" "main" {
   subnet_ids = var.subnet_ids
 
   scaling_config {
-    desired_size = 2
-    min_size     = 1
-    max_size     = 3
+    desired_size = var.desired_nodes
+    min_size     = var.min_nodes
+    max_size     = var.max_nodes
   }
 
-  instance_types = ["t3.medium"]
+  instance_types = [
+    var.node_instance_type
+  ]
+
+  tags = {
+    Project     = "ProyectoDespachos"
+    Environment = "Lab"
+    ManagedBy   = "Terraform"
+  }
 
   depends_on = [
     aws_eks_cluster.main

@@ -10,3 +10,9 @@ subnet_ids = [
   "",
   ""
 ]
+
+node_instance_type = "t3.medium"
+
+desired_nodes = 2
+min_nodes     = 1
+max_nodes     = 3
