@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: backend-despachos
-        image: 889217351448.dkr.ecr.us-east-1.amazonaws.com/despachos-back-despachos:latest
+        image: 254006190654.dkr.ecr.us-east-1.amazonaws.com/despachos-back-despachos:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 8080

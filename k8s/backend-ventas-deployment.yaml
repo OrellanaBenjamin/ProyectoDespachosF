@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: backend-ventas
-        image: 889217351448.dkr.ecr.us-east-1.amazonaws.com/despachos-back-ventas:latest
+        image: 254006190654.dkr.ecr.us-east-1.amazonaws.com/despachos-back-ventas:latest
         imagePullPolicy: Always
 
         ports:
