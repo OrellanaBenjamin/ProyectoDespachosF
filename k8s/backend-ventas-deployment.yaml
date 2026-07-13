@@ -28,7 +28,7 @@ spec:
 
         envFrom:
           - secretRef:
-            name: mysql-secret
+              name: mysql-secret
 
         env:
           - name: DB_NAME

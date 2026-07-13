@@ -29,8 +29,8 @@ spec:
             memory: "1Gi"
         envFrom:
           - secretRef:
-            name: mysql-secret
+              name: mysql-secret
 
         env:
           - name: DB_NAME
-          value: "despachos"
+            value: "despachos"
